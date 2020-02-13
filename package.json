@@ -2,9 +2,11 @@
   "name": "discord-tournament-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r esm index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node_modules/.bin/webpack --config webpack.config.js --progress --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/guidovdijk/discord-tournament-bot/issues"
   },
-  "homepage": "https://github.com/guidovdijk/discord-tournament-bot#readme"
+  "homepage": "https://github.com/guidovdijk/discord-tournament-bot#readme",
+  "devDependencies": {
+    "discord.js": "^11.5.1"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
 }
