@@ -1,0 +1,19 @@
+{
+  "name": "discord-tournament-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidovdijk/discord-tournament-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guidovdijk/discord-tournament-bot/issues"
+  },
+  "homepage": "https://github.com/guidovdijk/discord-tournament-bot#readme"
+}
