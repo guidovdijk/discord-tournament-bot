@@ -5,7 +5,7 @@ import * as serviceAccount from "./service-account.json";
 import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
 import deleteCollection from './firebase/deleteCollection';
-import createCollection from './firebase/createCollection';
+import createTournament from './createTournament';
 
 
 const fieldValue = FirebaseAdmin.firestore.FieldValue;
@@ -32,16 +32,18 @@ bot.on('message', async msg => {
     const collectionName = "tournament"
     checkPrefix(msg, prefix, `please provide the prefix '${prefix}'`);
 
-    switch(msg.content){
-        case '!tournament-init':
-            createCollection(db, msg);
-            msg.reply("Tournament was created, please pick your teammate(s)!");
+    const args = msg.content.slice(prefix.length).split(/ +/g);
+    const command = args.shift().toLowerCase();
+
+    switch(command){
+        case 'tournament-init':
+            new createTournament(db, collectionName, msg, args);
         break
-        case '!tournament-end':
+        case 'tournament-end':
             deleteCollection(db, collectionName);
 
             msg.reply('Tournament has ended, until next time!');
-        case '!tournament-team':
+        case 'tournament-team':
             createTeam(msg);
             msg.reply('Team is created, good luck!');
         break
