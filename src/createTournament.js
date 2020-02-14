@@ -13,6 +13,7 @@ class createTournament {
                 uneven: `Tournament will be created, but there is an uneven amount of teams.\nPlease make sure it is even so everyone can play.`,
             },
             created: {
+                color: 0x0da258,
                 title: "**Tournament is created, please pick your teammate(s)!**",
                 fields: [
                     {
