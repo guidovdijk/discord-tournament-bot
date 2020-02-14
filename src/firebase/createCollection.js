@@ -11,3 +11,5 @@ const createCollection = (db, collection) => {
         }
     })
 }
+
+export default createCollection;
