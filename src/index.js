@@ -29,7 +29,10 @@ bot.on('ready', () => {
 
 bot.on('message', async msg => {
 
-    const collectionName = "tournament"
+    const collectionNames = {
+        tournament: "tournament",
+        teams: "teams",
+    }
     checkPrefix(msg, prefix, `please provide the prefix '${prefix}'`);
 
     const args = msg.content.slice(prefix.length).split(/ +/g);
@@ -37,14 +40,14 @@ bot.on('message', async msg => {
 
     switch(command){
         case 'tournament-init':
-            new createTournament(db, collectionName, msg, args);
+            new createTournament(db, collectionNames.tournament, msg, args);
         break
         case 'tournament-end':
-            deleteCollection(db, collectionName);
+            deleteCollection(db, collectionNames.tournament);
 
             msg.reply('Tournament has ended, until next time!');
         case 'tournament-team':
-            createTeam(msg);
+            new createTeam(db, collectionNames, msg, args);
             msg.reply('Team is created, good luck!');
         break
     }
