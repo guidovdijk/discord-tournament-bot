@@ -6,6 +6,7 @@ import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
 import deleteCollection from './firebase/deleteCollection';
 import createTournament from './createTournament';
+import startTournament from './startTournament';
 import createTeam from './createTeam';
 import updateTeam from './updateTeam';
 
@@ -40,6 +41,10 @@ bot.on('message', async msg => {
         case 'tournament-init':
             new createTournament(db, collectionNames.tournament, msg, args);
             break;
+        case 'tournament-start':
+            new startTournament(db, collectionNames.tournament, msg);
+
+            break;
         case 'tournament-end':
             deleteCollection(db, collectionNames.tournament);
 
@@ -49,7 +54,7 @@ bot.on('message', async msg => {
             new createTeam(bot, db, collectionNames, msg);
             break;
         case 'tournament-update':
-            new updateTeam(fieldValue, db, collectionNames.teams, msg);
+            new updateTeam(fieldValue, db, collectionNames, msg);
             break;
     }
 })
