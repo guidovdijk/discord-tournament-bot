@@ -68,7 +68,7 @@ class createTeam {
 
                     const dataTeamLowerCase = data.team.map(player => player.toLowerCase());
 
-                    const unavailablePlayers = this.players.map((player) => {
+                    const unavailablePlayers = this.players.filter((player) => {
                         if(dataTeamLowerCase.includes(player.toLowerCase())){
                             return player;
                         }
