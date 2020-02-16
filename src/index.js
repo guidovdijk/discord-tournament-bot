@@ -48,6 +48,9 @@ bot.on('message', async msg => {
         case 'tournament-team':
             new createTeam(bot, db, collectionNames, msg);
             break;
+        case 'tournament-update':
+            new updateTeam(fieldValue, db, collectionNames.teams, msg);
+            break;
     }
 })
 
