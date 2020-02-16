@@ -1,5 +1,6 @@
 class createTeam {
-    constructor(db, collection, msg){
+    constructor(bot, db, collection, msg){
+        this.bot = bot,
         this.db = db;
         this.collection = collection;
         this.msg = msg;
@@ -45,15 +46,30 @@ class createTeam {
         const args = this.msg.content.substring(this.msg.content.indexOf(" ") + 1);
         const players = args.split(/\s*,\s*/g);
 
-        this.players = players;
         this.teamSize = teamSize;
 
-        if(this.players.length !== teamSize){
+        if(players.length !== teamSize){
             this.msg.reply(`Error team size is not equal to ${teamSize}\n` + this.replies.formatError);
             return;
         } else {
-            this.checkPlayerAvailability()
+            this.getUsernames(players)
         }
+    }
+
+    getUsernames(players){
+        const members = this.msg.mentions.users;
+
+        this.players = players.filter(player => {
+            if(!player.startsWith('<@')){
+                return player;
+            }
+        });
+
+        members.forEach(member => {
+            this.players.push(member.username);
+        });
+
+        this.checkPlayerAvailability();
     }
 
     checkPlayerAvailability(){
@@ -91,7 +107,7 @@ class createTeam {
 
     createTeam(){
         this.db.collection(this.collection.teams).doc().set({
-            owner: this.players[0],
+            owner: this.msg.member.user.tag,
             team: this.players,
         }).then(() => {
             this.msg.reply(this.replies.teamCreated + `${this.players.map(player => { return `\nName: ${player}` } )}`);

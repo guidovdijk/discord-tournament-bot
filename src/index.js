@@ -7,7 +7,7 @@ import checkPrefix from './helpers/checkPrefix';
 import deleteCollection from './firebase/deleteCollection';
 import createTournament from './createTournament';
 import createTeam from './createTeam';
-
+import updateTeam from './updateTeam';
 
 const fieldValue = FirebaseAdmin.firestore.FieldValue;
 const prefix = '!';
@@ -17,12 +17,9 @@ FirebaseAdmin.initializeApp({
 });
 
 const db = FirebaseAdmin.firestore();
-
-
-
 const bot = new Discord.Client();
-
 const token = process.env.Token;
+
 
 bot.on('ready', () => {
     console.log('bot is ready');
@@ -49,7 +46,7 @@ bot.on('message', async msg => {
             msg.reply('Tournament has ended, until next time!');
             break;
         case 'tournament-team':
-            new createTeam(db, collectionNames, msg);
+            new createTeam(bot, db, collectionNames, msg);
             break;
     }
 })
