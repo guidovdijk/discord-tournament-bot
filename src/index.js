@@ -6,6 +6,7 @@ import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
 import deleteCollection from './firebase/deleteCollection';
 import createTournament from './createTournament';
+import createTeam from './createTeam';
 
 
 const fieldValue = FirebaseAdmin.firestore.FieldValue;
@@ -41,15 +42,15 @@ bot.on('message', async msg => {
     switch(command){
         case 'tournament-init':
             new createTournament(db, collectionNames.tournament, msg, args);
-        break
+            break;
         case 'tournament-end':
             deleteCollection(db, collectionNames.tournament);
 
             msg.reply('Tournament has ended, until next time!');
+            break;
         case 'tournament-team':
-            new createTeam(db, collectionNames, msg, args);
-            msg.reply('Team is created, good luck!');
-        break
+            new createTeam(db, collectionNames, msg);
+            break;
     }
 })
 
