@@ -1,3 +1,5 @@
+import checkTournament from './helpers/checkTournament';
+
 class updateTeam {
     constructor(fieldValue, db, collection, msg){
         this.fieldValue = fieldValue;
@@ -13,8 +15,23 @@ class updateTeam {
             updateError: "Error: Could not update player. Please try again.",
             generalCollectingError: "Error: could not collect teams.",
             collectTeamError: "Error: could not collect your team.",
+            noTournament: "No tournament has been started yet.",
+            tournamentClosed: "Tournament has been closed you can not change your team anymore.",
         };
-        this.checkArgs();
+        this.getTournamentData();
+    }
+
+    getTournamentData(){
+
+        this.db.collection(this.collection.tournament).doc('data').get().then(doc => {
+            const tournamentOpen = checkTournament(doc, this.msg, this.replies.noTournament);
+    
+            if(tournamentOpen){
+                this.checkArgs();
+            } else {
+                this.msg.reply(this.replies.tournamentClosed);
+            }
+        });
     }
 
     checkArgs(){
@@ -47,7 +64,7 @@ class updateTeam {
 
     checkPlayerAvailability(){
         // Create a reference to the cities collection
-        const teamsCollection = this.db.collection(this.collection);
+        const teamsCollection = this.db.collection(this.collection.teams);
         const member = this.msg.member.user;
         const unavailablePlayers = [];
 
@@ -108,14 +125,10 @@ class updateTeam {
     }
 
     updateTeam(id){
-        const doc = this.db.collection(this.collection).doc(id);
+        const doc = this.db.collection(this.collection.teams).doc(id);
  
         doc.update({
-            team: this.fieldValue.arrayRemove(this.players[0])
-        }).then(() => {
-            doc.update({
-                team: this.fieldValue.arrayUnion(this.players[1])
-            })
+            team: this.fieldValue.arrayRemove(this.players[0]).arrayUnion(this.players[1])
         }).then(() => {
             this.msg.reply(this.replies.teamUpdated + `changed: **${this.players[0]}** with: **${this.players[1]}**`);
         }).catch((err) => {
