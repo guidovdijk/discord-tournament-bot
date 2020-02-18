@@ -4,9 +4,9 @@ import FirebaseAdmin from "firebase-admin";
 import * as serviceAccount from "./service-account.json";
 import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
-import deleteCollection from './firebase/deleteCollection';
 import createTournament from './createTournament';
 import startTournament from './startTournament';
+import endTournament from './endTournament';
 import createTeam from './createTeam';
 import updateTeam from './updateTeam';
 
@@ -31,6 +31,7 @@ bot.on('message', async msg => {
     const collectionNames = {
         tournament: "tournament",
         teams: "teams",
+        leaderboard: "leaderboard"
     }
     checkPrefix(msg, prefix, `please provide the prefix '${prefix}'`);
 
@@ -46,9 +47,7 @@ bot.on('message', async msg => {
 
             break;
         case 'tournament-end':
-            deleteCollection(db, collectionNames.tournament);
-
-            msg.reply('Tournament has ended, until next time!');
+            new endTournament(db, collectionNames, msg)
             break;
         case 'tournament-team':
             new createTeam(bot, db, collectionNames, msg);
