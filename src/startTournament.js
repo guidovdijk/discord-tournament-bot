@@ -6,7 +6,7 @@ class startTournament {
         this.collection = collection;
         this.msg = msg;
         this.replies = {
-            noTournament: "No tournament has been started yet. Please use the ```!tournament-init <team size>  <minimum required participators>``` to create a tournament.",
+            noTournament: "No tournament has been created yet. Please use the ```!tournament-init <team size>  <minimum required participators>``` to create a tournament.",
             tournamentClosed: "Tournament has been closed no one can sign up anymore.",
             tournamentError: "Error: could not close the tournament. Please try again later."
         };
