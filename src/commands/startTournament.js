@@ -1,4 +1,4 @@
-import checkTournament from './helpers/checkTournament';
+import checkTournament from '../helpers/checkTournament';
 
 class startTournament {
     constructor(db, collection, msg){

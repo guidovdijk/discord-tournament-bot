@@ -1,4 +1,4 @@
-import deleteCollection from './firebase/deleteCollection';
+import deleteCollection from '../firebase/deleteCollection';
 
 class endTournament {
     constructor(db, collection, msg){

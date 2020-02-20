@@ -4,7 +4,7 @@ import FirebaseAdmin from "firebase-admin";
 import * as serviceAccount from "./service-account.json";
 import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
-import createTournament from './createTournament';
+import createTournament from './commands/createTournament';
 import startTournament from './startTournament';
 import endTournament from './endTournament';
 import createTeam from './createTeam';
