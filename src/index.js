@@ -5,10 +5,10 @@ import * as serviceAccount from "./service-account.json";
 import 'dotenv/config';
 import checkPrefix from './helpers/checkPrefix';
 import createTournament from './commands/createTournament';
-import startTournament from './startTournament';
-import endTournament from './endTournament';
-import createTeam from './createTeam';
-import updateTeam from './updateTeam';
+import startTournament from './commands/startTournament';
+import endTournament from './commands/endTournament';
+import createTeam from './commands/createTeam';
+import updateTeam from './commands/updateTeam';
 
 const fieldValue = FirebaseAdmin.firestore.FieldValue;
 const prefix = '!';
