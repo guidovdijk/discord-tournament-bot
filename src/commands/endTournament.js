@@ -40,6 +40,7 @@ class endTournament {
         const fields = [];
 
         teamSorted.map((team, index) => {
+            if(index == 3) { return; }
             const place = index + 1;
             const players = `**${place}${this.getPlacementText(place)}** ${team.team.toString()}`;
             const matches = {
