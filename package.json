@@ -25,6 +25,6 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "firebase": "^7.8.1",
-    "firebase-admin": "^8.9.2"
+    "firebase-admin": "^11.4.1"
   }
 }
